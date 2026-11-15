@@ -1,0 +1,112 @@
+[
+  {
+    "Id": "ce6aa4f1-ca1f-4d86-93cd-89a1346a63f4",
+    "Title": "Inception",
+    "Director": "Christopher Nolan",
+    "ReleaseYear": 2010,
+    "DurationMinutes": 148,
+    "MinAge": 16,
+    "Genre": {
+      "Name": "Sci-Fi",
+      "Description": "Science fiction and futuristic themes"
+    },
+    "RequiredPlan": 2,
+    "Reviews": [
+      {
+        "Author": "Alex",
+        "Rating": 9,
+        "Comment": "Masterpiece!",
+        "CreatedAt": "2026-11-15T14:55:18.0003389Z"
+      },
+      {
+        "Author": "Sarah",
+        "Rating": 10,
+        "Comment": "Mind blowing concept!",
+        "CreatedAt": "2026-11-15T14:55:18.0005404Z"
+      },
+      {
+        "Author": "Daria",
+        "Rating": 10,
+        "Comment": "Masterpiece!",
+        "CreatedAt": "2026-11-15T15:57:22.2153124Z"
+      }
+    ]
+  },
+  {
+    "Id": "ad854b69-d7f4-4489-9e6b-ba880e0b8c1a",
+    "Title": "Interstellar",
+    "Director": "Christopher Nolan",
+    "ReleaseYear": 2014,
+    "DurationMinutes": 169,
+    "MinAge": 12,
+    "Genre": {
+      "Name": "Sci-Fi",
+      "Description": "Science fiction and futuristic themes"
+    },
+    "RequiredPlan": 3,
+    "Reviews": [
+      {
+        "Author": "John",
+        "Rating": 10,
+        "Comment": "Best soundtrack and visuals.",
+        "CreatedAt": "2026-11-15T14:55:18.0005566Z"
+      }
+    ]
+  },
+  {
+    "Id": "53120031-fd5a-4519-8e29-9c0fcd09457e",
+    "Title": "The Lion King",
+    "Director": "Roger Allers",
+    "ReleaseYear": 1994,
+    "DurationMinutes": 88,
+    "MinAge": 0,
+    "Genre": {
+      "Name": "Animation",
+      "Description": "Animated cartoons and family entertainment"
+    },
+    "RequiredPlan": 1,
+    "Reviews": [
+      {
+        "Author": "Emma",
+        "Rating": 9,
+        "Comment": "Childhood classic.",
+        "CreatedAt": "2026-11-15T14:55:18.0005578Z"
+      }
+    ]
+  },
+  {
+    "Id": "b607c1ef-7368-4a31-bcfb-366675722932",
+    "Title": "Oppenheimer",
+    "Director": "Christopher Nolan",
+    "ReleaseYear": 2023,
+    "DurationMinutes": 180,
+    "MinAge": 18,
+    "Genre": {
+      "Name": "Drama",
+      "Description": "In-depth character development and emotional themes"
+    },
+    "RequiredPlan": 3,
+    "Reviews": [
+      {
+        "Author": "David",
+        "Rating": 9,
+        "Comment": "Incredible acting and tension.",
+        "CreatedAt": "2026-11-15T14:55:18.0005584Z"
+      }
+    ]
+  },
+  {
+    "Id": "2d18f65c-c610-4c2d-b914-1b23292e53b7",
+    "Title": "The Matrix",
+    "Director": "Wachowski",
+    "ReleaseYear": 1999,
+    "DurationMinutes": 136,
+    "MinAge": 16,
+    "Genre": {
+      "Name": "Sci-Fi",
+      "Description": "Cyberpunk action"
+    },
+    "RequiredPlan": 2,
+    "Reviews": []
+  }
+]

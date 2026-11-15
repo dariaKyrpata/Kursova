@@ -1,0 +1,173 @@
+@startuml
+skinparam classAttributeIconSize 0
+skinparam monochrome false
+skinparam packageStyle rectangle
+skinparam shadowing true
+
+package "Domain.Core.Models" {
+    enum SubscriptionTier {
+        Free = 1
+        Standard = 2
+        Premium = 3
+    }
+
+    class Genre {
+        - string _name
+        - string _description
+        + string Name
+        + string Description
+        + ToString(): string
+    }
+
+    class UserReview {
+        - string _author
+        - int _rating
+        - string _comment
+        + string Author
+        + int Rating
+        + string Comment
+        + DateTime CreatedAt
+        + ToString(): string
+    }
+
+    class Movie {
+        - string _title
+        - string _director
+        - int _releaseYear
+        - int _durationMinutes
+        - int _minAge
+        - Genre _genre
+        - List<UserReview> _reviews
+        + Guid Id
+        + string Title
+        + string Director
+        + int ReleaseYear
+        + int DurationMinutes
+        + int MinAge
+        + Genre Genre
+        + SubscriptionTier RequiredPlan
+        + List<UserReview> Reviews
+        + AddReview(review: UserReview): void
+        + CalculateAverageRating(): double
+        + CompareTo(other: Movie): int
+        + ToString(): string
+    }
+
+    class User {
+        - string _username
+        - int _age
+        + string Username
+        + int Age
+        + SubscriptionTier Subscription
+        + ToString(): string
+    }
+}
+
+package "Domain.Core.Exceptions" {
+    class Exception
+    class AgeRestrictionException {
+        - int _userAge
+        - int _requiredAge
+        + int UserAge
+        + int RequiredAge
+    }
+    class PremiumContentException {
+        - string _currentPlan
+        - string _requiredPlan
+        + string CurrentPlan
+        + string RequiredPlan
+    }
+    AgeRestrictionException --|> Exception
+    PremiumContentException --|> Exception
+}
+
+package "Domain.Core.Interfaces" {
+    interface IRepository<T> {
+        + Add(item: T): void
+        + Remove(item: T): bool
+        + GetAll(): List<T>
+        + Find(match: Predicate<T>): List<T>
+        + Clear(): void
+    }
+
+    interface IMovieCatalogService {
+        + GetAllMovies(): IReadOnlyList<Movie>
+        + AddMovie(movie: Movie): void
+        + RemoveMovie(movieId: Guid): bool
+        + GetMovieById(movieId: Guid): Movie
+        + AddReview(movieId: Guid, review: UserReview): void
+        + CalculateAverageRating(movieId: Guid): double
+        + SortMoviesByRating(descending: bool): List<Movie>
+        + SortMoviesByYear(descending: bool): List<Movie>
+        + FilterByAge(maxAge: int): List<Movie>
+        + WatchMovie(user: User, movieId: Guid): void
+        + SaveData(): void
+        + LoadData(): void
+    }
+}
+
+package "Domain.Core.Repositories" {
+    class Repository<T> {
+        - List<T> _items
+        + Add(item: T): void
+        + Remove(item: T): bool
+        + GetAll(): List<T>
+        + Find(match: Predicate<T>): List<T>
+        + Clear(): void
+    }
+    Repository ..|> IRepository
+}
+
+package "Domain.Core.Comparers" {
+    interface "IComparer<Movie>" as IComparerMovie
+    class MovieRatingComparer {
+        - bool _descending
+        + Compare(x: Movie, y: Movie): int
+    }
+    class MovieYearComparer {
+        - bool _descending
+        + Compare(x: Movie, y: Movie): int
+    }
+    MovieRatingComparer ..|> IComparerMovie
+    MovieYearComparer ..|> IComparerMovie
+}
+
+package "Domain.Core.Services" {
+    class JsonFileService<T> {
+        - string _filePath
+        - JsonSerializerOptions _options
+        + Save(data: List<T>): void
+        + Load(): List<T>
+    }
+
+    class MovieCatalogService {
+        - IRepository<Movie> _repository
+        - JsonFileService<Movie> _fileService
+        + GetAllMovies(): IReadOnlyList<Movie>
+        + AddMovie(movie: Movie): void
+        + RemoveMovie(movieId: Guid): bool
+        + GetMovieById(movieId: Guid): Movie
+        + AddReview(movieId: Guid, review: UserReview): void
+        + CalculateAverageRating(movieId: Guid): double
+        + SortMoviesByRating(descending: bool): List<Movie>
+        + SortMoviesByYear(descending: bool): List<Movie>
+        + FilterByAge(maxAge: int): List<Movie>
+        + WatchMovie(user: User, movieId: Guid): void
+        + SaveData(): void
+        + LoadData(): void
+    }
+    MovieCatalogService ..|> IMovieCatalogService
+    MovieCatalogService o-- IRepository
+    MovieCatalogService o-- JsonFileService
+}
+
+interface "IComparable<Movie>" as IComparableMovie
+Movie ..|> IComparableMovie
+Movie *-- UserReview : "0..*"
+Movie o-- Genre : "1"
+Movie --> SubscriptionTier
+User --> SubscriptionTier
+MovieCatalogService ..> AgeRestrictionException : <<throws>>
+MovieCatalogService ..> PremiumContentException : <<throws>>
+
+@enduml

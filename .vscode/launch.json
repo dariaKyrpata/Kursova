@@ -1,0 +1,16 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": ".NET Launch (External Console)",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/Domain.UI/bin/Debug/net10.0/Domain.UI.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/Domain.UI",
+            "console": "externalTerminal",
+            "stopAtEntry": false
+        }
+    ]
+}
